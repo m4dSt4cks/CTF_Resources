@@ -1,12 +1,26 @@
 import decimal
 import math
 
+# Returns GCD, x, y such that a * x + b * y = GCD(a, b)
 def egcd(a, b):
     if a == 0:
         return (b, 0, 1)
     else:
         g, y, x = egcd(b % a, a)
         return (g, x - (b // a) * y, y)
+""" 
+GCD of 97/20		
+97=4*20+17
+20=1*17+3
+17=5*3+2
+3=1*2+1 
+2=2*1+0
+GCD is 1 (remainder is 0 at end)
+
+GCD of 100/20
+100=5*20+0
+GCD is 20
+"""
 
 def modinv(a, m):
     g, x, y = egcd(a, m)
