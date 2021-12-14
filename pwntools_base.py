@@ -17,11 +17,10 @@ if not sys.warnoptions:
 def ff():
 	os.system('kill %d' % os.getpid())
 
-def sigstop_handler(signum, frame):
-	print("End the program with ff()")
-	IPython.embed()
+def sig_handler(signum, frame):
+	IPython.embed(banner1="End the program with ff()", confirm_exit=False)
 
-signal.signal(signal.SIGTSTP, sigstop_handler)
+signal.signal(signal.SIGINT, sig_handler)
 
 
 # context.aslr = False
@@ -81,7 +80,6 @@ if args.start:
 	commands(f"file {EXE}")
 	commands(f"ldd {EXE}")
 	commands(f"checksec {EXE}")
-	# TODO: search for certain strings in binary
 elif args.ssh:
 	s = ssh(user=SSH_USERNAME, host=SSH_HOST, port=SSH_PORT, password=SSH_PASSWORD)
 	r = do_ssh(s)

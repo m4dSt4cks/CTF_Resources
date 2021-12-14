@@ -1,0 +1,26 @@
+# Slightly more official cheatsheet: https://github.com/radareorg/radare2/blob/master/doc/intro.md
+
+r2 (or radare2) [filename]
+	?
+	a?
+	aaa (or aaaa) (or aaaaaaa)
+	V (visual mode)
+		? (help)
+			? (more help)
+			<letter> (help for that command)
+		c (toggle)
+		p (switch views)
+		i (insert/write)
+		q (quit)
+		: (run commands)
+			<enter> (returns to visual mode on blank line)
+	s? (seek commands)
+	afvn [new_name] [old_name] (rename variable, leave old_name blank if it's not defined already)
+	# debugging commands
+	db (breakpoint)
+	dc (continue)
+	ds (step)
+	doo (or ood) (open file)
+	doc (exit debugging)
+	
+rasm [filename]
