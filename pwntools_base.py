@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 import os
 from pwn import *
@@ -37,11 +39,18 @@ SSH_PASSWORD = ""
 SSH_HOST = ""
 SSH_PORT = 22
 
+def rl(r):
+	return r.recvlineS().rstrip()
+	
+def rb(r, nb):
+	return u64(r.recv(nb).rstrip().ljust(8, b'\0'))
+
 
 def do_stuff(r, is_remote=False):
 	# r.settimeout(10)
 	# r.sendline()
 	# r.recvlineS()
+	# r.recvrepeat()
 	# r.sendlineafter()
 	# recvline_startswithS()
 	# recvline_endswithS()

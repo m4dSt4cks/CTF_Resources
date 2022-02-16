@@ -22,8 +22,8 @@ logging.getLogger("angr").setLevel(logging.INFO)
 ### Project to wrap the EXE. Maybe don't want to go into SO code ###
 # https://docs.angr.io/built-in-analyses/cfg#shared-libraries
 
-proj = angr.Project(PROGRAM)
-# proj = angr.Project(PROGRAM, load_options={"auto_load_libs": False})
+# proj = angr.Project(PROGRAM)
+proj = angr.Project(PROGRAM, load_options={"auto_load_libs": False})
 
 
 ### Creating a symbolic variable for input ###
@@ -69,10 +69,11 @@ for i in range(byte_length):
 
 # Can add more constraints for certain letters if you know the beginning
 # initial_state.add_constraints(argv1.chop(8)[0] == 'C')
-# Make sure none of the input bytes are NULL
+"""
+# Make sure none of the input bytes are NULL (May not be good if the given string is null terminated)
 for byte in input_data.chop(8):
     initial_state.add_constraints(byte != 0)
-
+"""
 
 ### Create simulation manager ###
 # Simulation managers are a basic building block of the symbolic execution engine.
