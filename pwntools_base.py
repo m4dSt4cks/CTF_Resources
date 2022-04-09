@@ -13,21 +13,21 @@ import string
 
 
 if not sys.warnoptions:
-	import warnings
-	warnings.simplefilter("ignore")
-	
+    import warnings
+    warnings.simplefilter("ignore")
+    
 def ff():
-	os.system('kill %d' % os.getpid())
+    os.system('kill %d' % os.getpid())
 
 def sig_handler(signum, frame):
-	IPython.embed(banner1="End the program with ff()", confirm_exit=False)
+    IPython.embed(banner1="End the program with ff()", confirm_exit=False)
 
 signal.signal(signal.SIGINT, sig_handler)
 
 
 # context.aslr = False
 # context.arch="amd64"
-context.log_level = 'warning'	# 'debug' 'info' 'warning' 'error' 'critical'
+context.log_level = 'warning'    # 'debug' 'info' 'warning' 'error' 'critical'
 # log.info()
 
 EXE = "./binary"
@@ -40,39 +40,39 @@ SSH_HOST = ""
 SSH_PORT = 22
 
 def rl(r):
-	return r.recvlineS().rstrip()
-	
+    return r.recvlineS().rstrip()
+    
 def rb(r, nb):
-	return u64(r.recv(nb).rstrip().ljust(8, b'\0'))
+    return u64(r.recv(nb).rstrip().ljust(8, b'\0'))
 
 
 def do_stuff(r, is_remote=False):
-	# r.settimeout(10)
-	# r.sendline()
-	# r.recvlineS()
-	# r.recvrepeat()
-	# r.sendlineafter()
-	# recvline_startswithS()
-	# recvline_endswithS()
-	# There's also regex functions, etc
-	
-	# r.stream()
-	# r.wait()
-	r.interactive()
+    # r.settimeout(10)
+    # r.sendline()
+    # r.recvlineS()
+    # r.recvrepeat()
+    # r.sendlineafter()
+    # recvline_startswithS()
+    # recvline_endswithS()
+    # There's also regex functions, etc
+    
+    # r.stream()
+    # r.wait()
+    r.interactive()
 
 def do_ssh(s):
-	# s['ls']
-	# s.download_file('/etc/passwd')
-	# s.set_working_directory("~")
-	# s.checksec()
-	r = s.system("./vuln")
-	return r
+    # s['ls']
+    # s.download_file('/etc/passwd')
+    # s.set_working_directory("~")
+    # s.checksec()
+    r = s.system("./vuln")
+    return r
 
 def commands(c):
-	p = subprocess.Popen(c, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	out, err = p.communicate()
-	print(out.decode())
-	print(err.decode())
+    p = subprocess.Popen(c, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    print(out.decode())
+    print(err.decode())
 
 
 parser = argparse.ArgumentParser(description="Template PWNtools script.")
@@ -85,37 +85,36 @@ group.add_argument("--start", action="store_true", help="Prints helpful debug in
 args = parser.parse_args(sys.argv[1:])
 
 if args.start:
-	commands(f"chmod +x {EXE}")
-	commands(f"file {EXE}")
-	commands(f"ldd {EXE}")
-	commands(f"checksec {EXE}")
+    commands(f"chmod +x {EXE}")
+    commands(f"file {EXE}")
+    commands(f"ldd {EXE}")
+    commands(f"checksec {EXE}")
 elif args.ssh:
-	s = ssh(user=SSH_USERNAME, host=SSH_HOST, port=SSH_PORT, password=SSH_PASSWORD)
-	r = do_ssh(s)
-	do_stuff(r)
-	r.close()
-	s.close()
+    s = ssh(user=SSH_USERNAME, host=SSH_HOST, port=SSH_PORT, password=SSH_PASSWORD)
+    r = do_ssh(s)
+    do_stuff(r)
+    r.close()
+    s.close()
 elif args.remote:
-	r = remote(HOSTNAME, PORT)
-	do_stuff(r, True)
-	r.close()
+    r = remote(HOSTNAME, PORT)
+    do_stuff(r, True)
+    r.close()
 elif args.debug:
-	if COMMAND_SCRIPT:
-		r = gdb.debug(EXE, open(COMMAND_SCRIPT).read())
-	else:
-		r = gdb.debug(EXE)
-	do_stuff(r)
-	r.close()
+    if COMMAND_SCRIPT:
+        r = gdb.debug(EXE, open(COMMAND_SCRIPT).read())
+    else:
+        r = gdb.debug(EXE)
+    do_stuff(r)
+    r.close()
 elif args.attach:
-	p = process(EXE)
-	if COMMAND_SCRIPT:
-		r = gdb.attach(p, open(COMMAND_SCRIPT).read())
-	else:
-		r = gdb.attach(p)
-	do_stuff(r)
-	r.close()
-	p.close()
+    p = process(EXE)
+    if COMMAND_SCRIPT:
+        gdb.attach(p, open(COMMAND_SCRIPT).read())
+    else:
+        gdb.attach(p)
+    do_stuff(p)
+    p.close()
 else:
-	r = process(EXE)
-	do_stuff(r)
-	r.close()
+    r = process(EXE)
+    do_stuff(r)
+    r.close()
