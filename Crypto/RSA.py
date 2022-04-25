@@ -1,5 +1,6 @@
 import decimal
 import math
+from Crypto.Util.number import long_to_bytes
 
 # Returns GCD, x, y such that a * x + b * y = GCD(a, b)
 def egcd(a, b):

@@ -1,0 +1,73 @@
+x ≡ 2 mod 5
+x ≡ 3 mod 11
+x ≡ 5 mod 17
+
+Form:
+x = a % m
+
+m0 = 5 * 11 * 17
+z1 = m0 / 5
+z2 = m0 / 11
+z3 = m0 / 17
+
+y1 = modinv(z1, m1)
+y2 = modinv(z2, m2)
+y3 = modinv(z3, m3)
+
+w1 = (y1 * z1) % m0
+w2 = (y2 * z2) % m0
+w3 = (y3 * z3) % m0
+
+x = a1 * w1 + a2 * w2 + a3 * w3
+
+https://www.geeksforgeeks.org/using-chinese-remainder-theorem-combine-modular-equations/
+
+# function implementing Chinese remainder theorem
+# list m contains all the modulii
+# list x contains the remainders of the equations
+def crt(m, x):  
+    # We run this loop while the list of
+    # remainders has length greater than 1
+    while True:
+          
+        # temp1 will contain the new value 
+        # of A. which is calculated according 
+        # to the equation m1' * m1 * x0 + m0'
+        # * m0 * x1
+        temp1 = modinv(m[1],m[0]) * x[0] * m[1] + modinv(m[0],m[1]) * x[1] * m[0]
+  
+        # temp2 contains the value of the modulus
+        # in the new equation, which will be the 
+        # product of the modulii of the two
+        # equations that we are combining
+        temp2 = m[0] * m[1]
+  
+        # we then remove the first two elements
+        # from the list of remainders, and replace
+        # it with the remainder value, which will
+        # be temp1 % temp2
+        x.remove(x[0])
+        x.remove(x[0])
+        x = [temp1 % temp2] + x 
+  
+        # we then remove the first two values from
+        # the list of modulii as we no longer require
+        # them and simply replace them with the new 
+        # modulii that  we calculated
+        m.remove(m[0])
+        m.remove(m[0])
+        m = [temp2] + m
+  
+        # once the list has only one element left,
+        # we can break as it will only  contain 
+        # the value of our final remainder
+        if len(x) == 1:
+            break
+  
+    # returns the remainder of the final equation
+    return x[0]
+  
+# driver segment
+m = [5, 11, 17]
+x = [2, 3, 5]
+print(crt(m, x))
