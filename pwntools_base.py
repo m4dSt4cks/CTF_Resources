@@ -50,12 +50,12 @@ def do_stuff(r, is_remote=False):
     # r.settimeout(10)
     # r.sendline()
     # r.recvlineS()
-    # r.recvrepeat()
     # r.sendlineafter()
     # recvline_startswithS()
     # recvline_endswithS()
     # There's also regex functions, etc
     
+    # r.recvrepeat(timeout)
     # r.stream()
     # r.wait()
     r.interactive()
