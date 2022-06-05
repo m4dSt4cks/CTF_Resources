@@ -82,6 +82,7 @@ group.add_argument("--ssh", action="store_true", help="Connect to remote host th
 group.add_argument("--attach", action="store_true", help="Attach to the local executable with a given command file", default=False)
 group.add_argument("--debug", action="store_true", help="Debug the local executable with a given command file", default=False)
 group.add_argument("--start", action="store_true", help="Prints helpful debug info/prepares the executable", default=False)
+group.add_argument("--strace", action="store_true", help="Stores strace output in strace_output", default=False)
 args = parser.parse_args(sys.argv[1:])
 
 if args.start:
@@ -114,6 +115,10 @@ elif args.attach:
         gdb.attach(p)
     do_stuff(p)
     p.close()
+elif args.trace:
+    r = process(["strace", "-o", "strace_output", "-f", EXE])
+    do_stuff(r)
+    r.close()
 else:
     r = process(EXE)
     do_stuff(r)
