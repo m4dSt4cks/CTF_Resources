@@ -115,7 +115,7 @@ elif args.attach:
         gdb.attach(p)
     do_stuff(p)
     p.close()
-elif args.trace:
+elif args.strace:
     r = process(["strace", "-o", "strace_output", "-f", EXE])
     do_stuff(r)
     r.close()
