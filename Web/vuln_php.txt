@@ -26,6 +26,8 @@ require()
 require_once()
 $_GET['func_name']($_GET['argument']);
 $func = new ReflectionFunction($_GET['func_name']); $func->invoke(); or $func->invokeArgs(array());
+call_user_func
+call_user_func_array
 
 List of functions which accept callbacks
 
